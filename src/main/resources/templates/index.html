@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/script/script.js"></script>
+</head>
+<body>
+<div class="app-container">
+    <header class="app-header">
+        <h1>Habit Tracker</h1>
+        <div class="date-navigation">
+            <button class="nav-button" id="prev-day">←</button>
+            <div class="date-picker-container">
+                <input type="date" id="date-picker" class="date-picker">
+            </div>
+            <button class="nav-button" id="next-day">→</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="tasks-section">
+            <h2>Dzisiejsze zadania</h2>
+            <div class="tasks-list"></div>
+        </section>
+        <section class="add-task-section">
+            <h2>Dodaj nowe zadanie</h2>
+            <form class="add-task-form">
+                <input type="text" placeholder="Nazwa" class="task-input" required>
+                <input type="date" class="task-date-input">
+                <button type="submit" class="add-button">Dodaj</button>
+            </form>
+        </section>
+    </main>
+</div>
+</body>
+</html>
