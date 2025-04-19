@@ -59,4 +59,15 @@ public class TaskController {
         taskService.completeTask(taskId);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping(path = "/month/{date}")
+    public ResponseEntity<List<Task>> getTasksFromMonth(@PathVariable LocalDate date) {
+        LocalDate startOfMonth = date.withDayOfMonth(1);
+        LocalDate endOfMonth = date.withDayOfMonth(date.lengthOfMonth());
+        List<Task> tasks = taskService.getTasksByDateRange(startOfMonth, endOfMonth);
+        if (tasks == null || tasks.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tasks);
+    }
 }

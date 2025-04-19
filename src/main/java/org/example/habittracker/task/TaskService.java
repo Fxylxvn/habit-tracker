@@ -58,4 +58,8 @@ public class TaskService {
     public List<Task> getTasksByDate(LocalDate date) {
         return taskRepository.findByDate(date);
     }
+
+    public List<Task> getTasksByDateRange(LocalDate start, LocalDate end) {
+        return taskRepository.findByDateBetween(start, end);
+    }
 }

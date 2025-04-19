@@ -10,4 +10,6 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findByDate(LocalDate date);
+
+    List<Task> findByDateBetween(LocalDate start, LocalDate end);
 }
