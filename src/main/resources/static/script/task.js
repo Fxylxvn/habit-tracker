@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM Elements
     const datePicker = document.getElementById('date-picker');
     const tasksList = document.querySelector('.tasks-list');
     const addTaskForm = document.querySelector('.add-task-form');
@@ -8,24 +7,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevDayBtn = document.getElementById('prev-day');
     const nextDayBtn = document.getElementById('next-day');
 
-    // Base API URL (adjust if needed)
+    // API URL
     const API_URL = 'http://localhost:8080/api/v1/task';
 
-    // Set today's date as default
+    // Ustaw początkową datę na dzisiaj
     const today = new Date().toISOString().split('T')[0];
     datePicker.value = today;
     taskDateInput.value = today;
 
-    // Event Listeners
+    // Dodaj nasłuchiwanie zdarzeń
     datePicker.addEventListener('change', loadTasksForDate);
     addTaskForm.addEventListener('submit', handleAddTask);
     prevDayBtn.addEventListener('click', navigateToPreviousDay);
     nextDayBtn.addEventListener('click', navigateToNextDay);
 
-    // Initial load
+    // Początkowe załadowanie zadań
     loadTasksForDate();
 
-    // Functions
+    // Załadowanie zadań dla wybranej daty
     async function loadTasksForDate() {
         try {
             const date = datePicker.value;
@@ -44,29 +43,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 tasksList.innerHTML = '<p class="no-tasks">Nic nie znaleziono</p>';
                 return;
             }
-            renderTasks(tasks); // Now passes the full array
+            renderTasks(tasks);
         } catch (error) {
             console.error('Error loading tasks:', error);
             tasksList.innerHTML = '<p class="no-tasks">Nic nie znaleziono</p>';
         }
     }
 
-    async function loadAllTasks() {
-        try {
-            const response = await fetch(API_URL);
-            if (!response.ok) throw new Error('Failed to fetch tasks');
-            const tasks = await response.json();
-            renderTasks(tasks);
-        } catch (error) {
-            console.error('Error loading tasks:', error);
-        }
-    }
-
+    // Renderowanie zadań
     function renderTasks(tasks) {
         tasksList.innerHTML = '';
 
         if (!tasks || tasks.length === 0) {
-            tasksList.innerHTML = '<p>No tasks found</p>';
+            tasksList.innerHTML = '<p>Nie znaleziono</p>';
             return;
         }
 
@@ -82,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             tasksList.appendChild(taskElement);
 
-            // Add event listeners for the new elements
             const checkbox = taskElement.querySelector('.task-checkbox');
             checkbox.addEventListener('change', () => toggleTaskCompletion(task.id));
 
@@ -91,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Dodanie nowego zadania
     async function handleAddTask(e) {
         e.preventDefault();
 
@@ -119,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Zmiana statusu zadania na ukończone/nieukończone
     async function toggleTaskCompletion(taskId) {
         try {
             const response = await fetch(`${API_URL}/${taskId}/complete`, {
@@ -133,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Usunięcie zadania
     async function deleteTask(taskId) {
         try {
             const response = await fetch(`${API_URL}/${taskId}`, {
@@ -147,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Nawigacja do poprzedniego/następnego dnia
     function navigateToPreviousDay() {
         const currentDate = new Date(datePicker.value);
         currentDate.setDate(currentDate.getDate() - 1);
@@ -161,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loadTasksForDate();
     }
 
+    // Formatowanie daty
     function formatDate(date) {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');

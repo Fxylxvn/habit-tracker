@@ -1,0 +1,26 @@
+.nav-top-bar {
+    background-color: #166088;
+    padding: 1rem 0;
+    width: 100%;
+    margin: 0 auto 35px auto;
+}
+
+.nav-bar-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1.5rem;
+    padding: 0 20px;
+}
+
+.nav-bar-link {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+
+}
+
+.nav-bar-link:hover {
+    text-decoration: underline;
+}

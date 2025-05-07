@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Tracker | Podsumowanie</title>
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <link rel="stylesheet" th:href="@{/css/summary.css}">
+  <script src="/script/summary.js"></script>
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="summary-container">
+  <header class="summary-header">
+    <h1>Podsumowanie miesiąca</h1>
+    <div class="month-navigation">
+      <button class="month-button" id="prev-month">←</button>
+      <div class="month-display" id="current-month">Styczeń 2077</div>
+      <button class="month-button" id="next-month">→</button>
+    </div>
+  </header>
+
+  <main class="summary-content">
+    <div class="stats-grid">
+      <div class="stat-card highlight">
+        <h3>Łącznie zadań</h3>
+        <div class="stat-value" id="total-tasks">0</div>
+      </div>
+      <div class="stat-card highlight">
+        <h3>Wykonano</h3>
+        <div class="stat-value" id="completed-tasks">0</div>
+      </div>
+      <div class="stat-card highlight">
+        <h3>Stopień wykonanych</h3>
+        <div class="stat-value" id="completion-rate">0%</div>
+      </div>
+    </div>
+
+    <section class="tasks-summary">
+      <h2>Lista zadań</h2>
+      <div class="tasks-list" id="tasks-list">
+
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>

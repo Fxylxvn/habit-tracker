@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<nav th:fragment="navbar" class="nav-top-bar">
+  <div class="nav-bar-container">
+    <a th:href="@{/task}" class="nav-bar-link">Zadania</a>
+    <a th:href="@{/summary}" class="nav-bar-link">Podsumowanie</a>
+  </div>
+</nav>
+</body>
+</html>

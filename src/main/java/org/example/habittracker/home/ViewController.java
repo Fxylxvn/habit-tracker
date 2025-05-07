@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ViewController {
 
-    @RequestMapping
-    public String index() {
-        return "index";
+    @RequestMapping("/task")
+    public String tasks() {
+        return "task";
+    }
+
+    @RequestMapping("/summary")
+    public String summary() {
+        return "summary";
     }
 }

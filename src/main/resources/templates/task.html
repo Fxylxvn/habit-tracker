@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habit Tracker</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/script/script.js"></script>
+    <title>Habit Tracker | Zadania</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/task.css}">
+    <script src="/script/task.js"></script>
 </head>
 <body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
 <div class="app-container">
     <header class="app-header">
         <h1>Habit Tracker</h1>
