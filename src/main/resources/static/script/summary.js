@@ -6,29 +6,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalTasksEl = document.getElementById('total-tasks');
     const completedTasksEl = document.getElementById('completed-tasks');
     const completionRateEl = document.getElementById('completion-rate');
+    const calendar = document.getElementById('calendar');
 
     let currentDate = new Date();
 
     // Ustaw początkową datę
     updateMonthDisplay();
     loadData();
+    loadCalendar();
 
     // poprzedni i następny miesiąc
     prevMonthBtn.addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         updateMonthDisplay();
         loadData();
+        loadCalendar();
     });
 
     nextMonthBtn.addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() + 1);
         updateMonthDisplay();
         loadData();
+        loadCalendar();
     });
 
     // Aktualizacja wyświetlania miesiąca
     function updateMonthDisplay() {
-        const options = { month: 'long', year: 'numeric' };
+        const options = {month: 'long', year: 'numeric'};
         monthDisplay.textContent = currentDate.toLocaleDateString('pl-PL', options);
     }
 
@@ -101,4 +105,43 @@ document.addEventListener('DOMContentLoaded', function() {
             month: 'short'
         });
     }
-});
+
+    function getDaysInMonth(year, month) {
+        return new Date(year, month, 0).getDate();
+    }
+
+    async function loadCalendar() {
+
+        calendar.innerHTML = '';
+
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const numDays = getDaysInMonth(year, month + 1);
+
+        for (let day = 1; day <= numDays; day++) {
+            const date = new Date(year, month, day);
+            const dateStr = date.toISOString().split('T')[0];
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day';
+
+            try {
+                const apiUrl = `http://localhost:8080/api/v1/task/date/${dateStr}`;
+                const response = await fetch(apiUrl);
+
+                if (response.ok) {
+                    const tasks = await response.json();
+                    if (tasks && tasks.length > 0) {
+                        dayDiv.classList.add('with-tasks');
+
+                        const taskCount = tasks.length;
+                        dayDiv.setAttribute('title', `${taskCount} zadań`);
+                    }
+                }
+            } catch (error) {
+                console.error(`Error fetching tasks for ${dateStr}:`, error);
+            }
+            dayDiv.innerHTML = `<div class="day-number">${day}</div>`;
+            calendar.appendChild(dayDiv);
+        }
+    })
+};

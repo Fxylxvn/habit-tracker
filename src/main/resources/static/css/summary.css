@@ -14,7 +14,6 @@ body {
 .summary-container {
     max-width: 800px;
     margin: 0 auto;
-    background-color: white;
     border-radius: 0 0 8px 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -130,4 +129,34 @@ body {
 
 .task-status.pending {
     color: #dc3545;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 15px;
+    border: 1px solid red;
+}
+
+.calendar-day {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    height: 60px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 5px;
+    position: relative;
+}
+
+.calendar-day.with-tasks {
+    background-color: #e3f2fd;
+    border-color: #166088;
+}
+
+.day-number {
+    font-weight: bold;
+    color: #333;
 }
