@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Habit Tracker | Kalendarz</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
+    <script src="/script/calendar.js"></script>
+</head>
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button id="prevMonthBtn">&lt;</button>
+            <h2 id="currentMonthYear"></h2>
+            <button id="nextMonthBtn">&gt;</button>
+        </div>
+        <div class="calendar-weekdays">
+            <div>Pn</div>
+            <div>Wt</div>
+            <div>Śr</div>
+            <div>Cz</div>
+            <div>Pt</div>
+            <div>So</div>
+            <div>Nd</div>
+        </div>
+        <div class="calendar-days" id="calendarDays">
+        </div>
+    </div>
+
+</body>
+</html>

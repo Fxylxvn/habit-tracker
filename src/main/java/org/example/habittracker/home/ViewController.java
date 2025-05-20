@@ -15,4 +15,9 @@ public class ViewController {
     public String summary() {
         return "summary";
     }
+
+    @RequestMapping("/calendar")
+    public String calendar() {
+        return "calendar";
+    }
 }

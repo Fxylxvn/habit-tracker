@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.calendar-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 700px;
+    margin-top: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.calendar-header h2 {
+    font-size: 2em;
+    margin: 0;
+}
+
+.calendar-header button {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1.8em;
+}
+
+.calendar-header button:hover {
+    background-color: #f0f0f0;
+}
+
+.calendar-weekdays, .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar-weekdays div {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.calendar-days div {
+    text-align: center;
+    padding: 15px 10px;
+    border: 1px solid #eee;
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    font-size: 1.2em;
+    position: relative;
+}
+
+.calendar-days div .task-count {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 0.7em;
+    padding: 2px 5px;
+    border-radius: 50%;
+    line-height: 1;
+    min-width: 18px;
+    min-height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-days div.empty {
+    background-color: #f9f9f9;
+    border: 1px solid #f9f9f9;
+}
+
+.calendar-days div.tasks-pending {
+    background-color: #ffcccc;
+    border-color: #ff9999;
+}
+
+.calendar-days div.tasks-completed-all {
+    background-color: #ccffcc;
+    border-color: #99ff99;
+}
+
+.calendar-days div.today {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border-color: #007bff;
+}
+
+.calendar-days div.today .task-count {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
