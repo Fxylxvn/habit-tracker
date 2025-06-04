@@ -151,13 +151,35 @@ body {
     text-decoration: line-through;
 }
 
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 3px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.edit-btn:hover {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
 .delete-btn {
     background: none;
     border: none;
     color: #dc3545;
     font-size: 1.2rem;
     cursor: pointer;
-    margin-left: 10px;
     padding: 0 5px;
     line-height: 1;
 }

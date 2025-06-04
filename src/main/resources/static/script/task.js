@@ -57,9 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!tasks || tasks.length === 0) {
             tasksList.innerHTML = '<p>Nie znaleziono</p>';
             return;
-        }
-
-        tasks.forEach(task => {
+        }        tasks.forEach(task => {
             const taskElement = document.createElement('div');
             taskElement.className = `task-item ${task.completed ? 'completed' : ''}`;
             taskElement.innerHTML = `
@@ -67,12 +65,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${task.completed ? 'checked' : ''}>
                 <label for="task-${task.id}" class="task-label">${task.name}</label>
                 <span class="task-date">${task.date}</span>
-                <button class="delete-btn" data-task-id="${task.id}">×</button>
+                <div class="task-actions">
+                    <button class="edit-btn" data-task-id="${task.id}">✏️</button>
+                    <button class="delete-btn" data-task-id="${task.id}">×</button>
+                </div>
             `;
             tasksList.appendChild(taskElement);
 
             const checkbox = taskElement.querySelector('.task-checkbox');
             checkbox.addEventListener('change', () => toggleTaskCompletion(task.id));
+
+            const editBtn = taskElement.querySelector('.edit-btn');
+            editBtn.addEventListener('click', () => editTask(task.id, task.name));
 
             const deleteBtn = taskElement.querySelector('.delete-btn');
             deleteBtn.addEventListener('click', () => deleteTask(task.id));
@@ -120,6 +124,31 @@ document.addEventListener('DOMContentLoaded', function() {
             loadTasksForDate();
         } catch (error) {
             console.error('Error completing task:', error);
+        }
+    }
+
+    // Edycja zadania
+    function editTask(taskId, currentName) {
+        const newName = prompt('Edytuj nazwę zadania:', currentName);
+        
+        if (newName === null || newName.trim() === '' || newName.trim() === currentName) {
+            return; // Użytkownik anulował lub nie wprowadził zmian
+        }
+
+        updateTask(taskId, newName.trim());
+    }    // Aktualizacja zadania
+    async function updateTask(taskId, newName) {
+        try {
+            const response = await fetch(`${API_URL}/${taskId}?name=${encodeURIComponent(newName)}`, {
+                method: 'PUT'
+            });
+
+            if (!response.ok) throw new Error('Failed to update task');
+
+            loadTasksForDate();
+        } catch (error) {
+            console.error('Error updating task:', error);
+            alert('Nie udało się zaktualizować zadania');
         }
     }
 
